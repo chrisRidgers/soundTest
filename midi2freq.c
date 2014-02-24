@@ -2,30 +2,35 @@
 #include <stdlib.h>
 #include <math.h>
 
-enum{ARG_NAME, ARG_SAMP_RATE, ARG_SINE_FREQ, ARGC};
+enum{ARG_NAME, ARG_INPUT, ARG_OUTPUT, ARGC};
 
 int main(int argc, char *argv[])
 {
+	float note;
+	float volume;
+	float duration;
+
 	if(argc!=ARGC)
 	{
 		printf("Invalid Argments\n");
 		return 1;
 	}
-	
-	long sampleRate = atol(argv[ARG_SAMP_RATE]);
-	float samplingPeriod = 1.0/sampleRate;
-	float sineFreq = atof(argv[ARG_SINE_FREQ]);
-	float sinePeriod = 1.0/sineFreq;
-	float value;
 
-	printf("\ntime\t\tvalue\n");
-	for(float time = 0; time <= sinePeriod; time+= samplingPeriod)
+	FILE *input;
+	input = fopen(argv[ARG_INPUT], "r");
+	if(input==NULL) return 1;
+	FILE *output; 
+	output  = fopen(argv[ARG_OUTPUT], "w");
+	if(input==NULL) return 1;
+
+	while(fscanf(input, "%f %f %f", &note, &volume, &duration)!=EOF)
 	{
-		value = sin(2*M_PI * sineFreq * time);
-		printf("%f\t%f\n", time, value);
+		float frequency = pow(2, (note-69)/12)*440;
+		float amplitude = volume/127;
+		fprintf(output, "%f\t%f\t%f\n", frequency, amplitude, duration);
 	}
-
-	printf("Sine Period:\t%f\n", sinePeriod);
+		fclose(input);
+		fclose(output);
 	return 0;
 }
 
