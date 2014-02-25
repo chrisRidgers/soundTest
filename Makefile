@@ -9,35 +9,35 @@ all-debug: sinecycleT.o midi2freqT.o
 	$(CC) sinecycleT.o -o sinecycle
 	$(CC) midi2freqT.o -o midi2freq
 
-sinecycle: CFLAGS+= -o sinecycle
+sinecycle: CFLAGS+= -o sinecycle -I include/
 sinecycle: sinecycle.o
 	$(CC) $(CFLAGS) sinecycle.o -o sinecycle
 
-midi2freq: CFLAGS+= -o midi2freq
+midi2freq: CFLAGS+= -o midi2freq -I include/
 midi2freq: midi2freq.o
 	$(CC) $(CFLAGS) midi2freq.o -o midi2freq
 
-sinecycle-debug: CFLAGS+= -o sinecycle
+sinecycle-debug: CFLAGS+= -o sinecycle -I include/ 
 sinecycle-debug: sinecycleT.o
 	$(CC) $(CFLAGS) sinecycleT.o -o sinecycle
 
-midi2freq-debug: CFLAGS+= -o midi2freq
+midi2freq-debug: CFLAGS+= -o midi2freq -I include/ 
 midi2freq-debug: midi2freqT.o
 	$(CC) $(CFLAGS) midi2freqT.o -o midi2freq
 
-sinecycleT.o: CFLAGS+= -c -g -o sinecycleT.o
+sinecycleT.o: CFLAGS+= -c -g -o sinecycleT.o -I include/ 
 sinecycleT.o: sinecycle.c
 	$(CC) $(CFLAGS) sinecycle.c
 
-midi2freqT.o: CFLAGS+= -c -g -o midi2freqT.o
+midi2freqT.o: CFLAGS+= -c -g -o midi2freqT.o -I include/ 
 midi2freqT.o: midi2freq.c
 	$(CC) $(CFLAGS) midi2freq.c 
 
-sinecycle.o: CFLAGS+= -c -o sinecycle.o
+sinecycle.o: CFLAGS+= -c -o sinecycle.o -I include/ 
 sinecycle.o: sinecycle.c
 	$(CC) $(CFLAGS) sinecycle.c 
 
-midi2freq.o: CFLAGS+= -c -o midi2freq.o
+midi2freq.o: CFLAGS+= -c -o midi2freq.o -I include/ 
 midi2freq.o: midi2freq.c
 	$(CC) $(CFLAGS) midi2freq.c 
 
