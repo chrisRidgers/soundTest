@@ -2,12 +2,12 @@ CC=gcc
 CFLAGS:=
 
 all: CFLAGS+= -L lib/
-all: sinecycle.o midi2freq.o
+all: portsf/portsf/libportsf.a sinecycle.o midi2freq.o 
 	$(CC) sinecycle.o -o sinecycle
 	$(CC) midi2freq.o -o midi2freq
 
 all-debug: CFLAGS+= -L lib/
-all-debug: sinecycleT.o midi2freqT.o
+all-debug:  portsf/portsf/libportsf.a sinecycleT.o midi2freqT.o
 	$(CC) sinecycleT.o -o sinecycle
 	$(CC) midi2freqT.o -o midi2freq
 
@@ -43,6 +43,10 @@ midi2freq.o: CFLAGS+= -c -o midi2freq.o -I include/
 midi2freq.o: midi2freq.c
 	$(CC) $(CFLAGS) midi2freq.c 
 
+portsf/portsf/libportsf.a:
+	make -C portsf/portsf/ -f Makefile install
+
 clean:
 	rm -rf *.o *.out* sinecycle midi2freq
+	make -C portsf/portsf/ -f Makefile veryclean
 
