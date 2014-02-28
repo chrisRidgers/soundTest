@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 
 	if(argc!=ARGC)
 	{
-		printf("Invalid Argments\n");
+		printf("Please use midi2freq as: midi2freq INPUT_MIDI_TXT OUTPUT_TXT\n");
 		return 1;
 	}
 
