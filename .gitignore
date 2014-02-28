@@ -10,3 +10,4 @@ midi2freq
 wav2aif
 MIDIOUT
 lib/
+*.DS_Store*
