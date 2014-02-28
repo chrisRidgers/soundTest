@@ -5,5 +5,8 @@
 *.wav
 *.aiff
 *.aif
+sinecycle
+midi2freq
+wav2aif
 MIDIOUT
 lib/
