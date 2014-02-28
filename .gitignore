@@ -2,5 +2,8 @@
 *.swp
 *.a
 *.o
+*.wav
+*.aiff
+*.aif
 MIDIOUT
 lib/
