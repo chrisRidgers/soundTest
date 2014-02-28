@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
 
 	num_frames = (long)psf_sndSize(infile);
 	buffer = (float*)malloc(num_frames*props.chans*sizeof(float));
-	if(buffer==0)
+	if(buffer==NULL)
 	{
 		printf("Error unable to allocate buffer\n");
 		if(psf_sndClose(infile))
@@ -54,6 +54,13 @@ int main(int argc, char *argv[])
 		{
 			printf("Warning: error closing %s\n", argv[ARG_OUTPUT]);
 		}
+		return 1;
+	}
+	printf("Reading %s to buffer \n", argv[ARG_INPUT]);
+
+	if(psf_sndReadFloatFrames(infile, buffer, num_frames) !=num_frames)
+	{
+		printf("Warning: error writing %s\n", argv[ARG_OUTPUT]);
 		return 1;
 	}
 
@@ -71,12 +78,13 @@ int main(int argc, char *argv[])
 			printf("Warning error closing %s\n", argv[ARG_INPUT]);
 		}
 	}
-	if(infile >= 0)
+	if(outfile >= 0)
 	{
 		if(psf_sndClose(outfile))
 		{
 			printf("Warning error closing %s\n", argv[ARG_OUTPUT]);
 		}
+		printf("Closed fine \n");
 	}
 	
 	psf_finish();
